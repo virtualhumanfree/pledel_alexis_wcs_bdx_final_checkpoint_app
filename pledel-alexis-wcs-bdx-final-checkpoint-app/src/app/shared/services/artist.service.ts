@@ -1,9 +1,9 @@
+import { Artist } from './../models/artist';
 import { environment } from './../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Artist } from '../models/artist';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,10 @@ export class ArtistService {
     return artists.map((artist) => {
       return new Artist(artist);
     });
+  }
+
+  public getArtistNotAssign(): Observable<Artist[]> {
+    return this.http.get(ArtistService.URL + '/artistNotAssign').pipe(map(this.convertDataFromServerToSites));
   }
 
   public getById(id: number): Observable<Artist> {

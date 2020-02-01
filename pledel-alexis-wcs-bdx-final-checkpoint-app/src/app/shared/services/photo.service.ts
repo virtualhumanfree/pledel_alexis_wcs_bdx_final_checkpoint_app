@@ -18,6 +18,10 @@ export class PhotoService {
     return this.http.get(PhotoService.URL).pipe(map(this.convertDataFromServerToSites));
   }
 
+  public getPhotoNotAssign(): Observable<Photo[]> {
+    return this.http.get(PhotoService.URL + '/photoNotAssign').pipe(map(this.convertDataFromServerToSites));
+  }
+
   private convertDataFromServerToSites(photos: any[]): Photo[] {
     return photos.map((photo) => {
       return new Photo(photo);
