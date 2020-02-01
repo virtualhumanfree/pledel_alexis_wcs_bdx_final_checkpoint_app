@@ -1,0 +1,25 @@
+<app-navbar></app-navbar>
+<div class="containerCard" *ngFor="let event of tabAllEvents; let i = index">
+  <mat-card>
+    <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title> {{ event.title }} </mat-card-title>
+    <mat-card-subtitle> {{ event.lieu.city }} </mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="{{ event.photobandeau }}" alt="Photo of a Shiba Inu">
+  </mat-card>
+  <mat-card>
+    <mat-card-content>
+      <div>
+         Cette évenement regroupera les numeros suivant :
+         <div *ngFor="let numero of event.numeros; let i = index">
+          <p> {{ i+1 }} - {{ numero.title }} </p>
+          <div *ngFor="let artist of numero.artists; let i = index">
+            <p>Artiste : {{ artist.firstname }} {{ artist.lastname }}</p>
+          </div>
+         </div>
+         Vous passerez un agréable moment accompagner de votre présentateur préféré {{ event.artists[0].firstname }} {{ event.artists[0].lastname }}
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,20 @@
+<app-navbar-connect [user]="user"></app-navbar-connect>
+<div class="containerCard" *ngFor="let numero of tabAllNumeros; let i = index">
+  <mat-card>
+    <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title> {{ numero.title }} </mat-card-title>
+    <mat-card-subtitle> {{ numero.photos[0].lieu.city }} </mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="{{ numero.photos[0].description }}" alt="Photo of a Shiba Inu">
+  </mat-card>
+  <mat-card>
+    <mat-card-content>
+      <p>
+        Ce numéro est réalisé par {{ numero.artists.firstname }} {{ numero.artists.lastname }}.
+        <br>
+        {{ numero.description }}
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>

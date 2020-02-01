@@ -1,8 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-
-const routes: Routes = [];
+const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'visitor' },
+  {
+    path: '',
+    loadChildren: () => import('./pages/visitor/visitor.module').then((m) => m.VisitorModule)
+  },
+  {
+    path: 'log',
+    loadChildren: () => import('./pages/connected/connected.module').then((m) => m.ConnectedModule)
+  },
+  // { path: '**', component: PageNotFoundComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

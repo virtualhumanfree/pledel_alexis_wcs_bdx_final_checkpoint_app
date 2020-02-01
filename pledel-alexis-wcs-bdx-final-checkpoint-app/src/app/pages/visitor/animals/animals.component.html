@@ -1,0 +1,20 @@
+<app-navbar></app-navbar>
+<div class="containerCard" *ngFor="let animal of tabAllAnimals; let i = index">
+  <mat-card>
+    <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title> {{ animal.name }} </mat-card-title>
+    <mat-card-subtitle> {{ animal.photos[0].lieu.city }} </mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="{{ animal.photos[0].description }}" alt="Photo of a Shiba Inu">
+  </mat-card>
+  <mat-card>
+    <mat-card-content>
+      <p>
+        Cette race de {{ animal.race }} est toujour bien soigner par leur fidèle dresseur {{ animal.artists[0].firstname }} {{ animal.artists[0].lastname }}
+        <br>
+        {{ animal.description }}
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>

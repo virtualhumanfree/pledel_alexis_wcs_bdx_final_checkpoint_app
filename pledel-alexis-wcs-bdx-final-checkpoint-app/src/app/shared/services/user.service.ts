@@ -1,7 +1,7 @@
 import { environment } from './../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
@@ -16,16 +16,16 @@ export class UserService {
   user: User;
   constructor(private http: HttpClient) { }
 
-  // public connexion(email: string, password: string) {
-  // 	return this.http.post(UserService.basedUrl + 'auth/signin', { email, password }, { observe: 'response' }).pipe(
-  // 		map((response: HttpResponse<any>) => {
-  // 			const token = response.headers.get('JWT-TOKEN');
-  // 			localStorage.setItem('TOKEN', token);
-  // 			this.user = response.body;
-  // 			return response.body;
-  // 		})
-  // 	);
-  // }
+  public connexion(email: string, password: string) {
+    return this.http.post(UserService.basedUrl + 'auth/signin', { email, password }, { observe: 'response' }).pipe(
+      map((response: HttpResponse<any>) => {
+        const token = response.headers.get('JWT-TOKEN');
+        localStorage.setItem('TOKEN', token);
+        this.user = response.body;
+        return response.body;
+      })
+    );
+  }
 
   // public inscription(values: any) {
   // 	return this.http.post(UserService.basedUrl + 'auth/signup', values);

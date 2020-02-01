@@ -1,0 +1,22 @@
+<app-navbar></app-navbar>
+<div *ngIf="tabAllArtists !== undefined">
+<div class="containerCard" *ngFor="let artist of tabAllArtists; let i = index">
+  <mat-card>
+    <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title> {{ artist.name_artist }} </mat-card-title>
+    <mat-card-subtitle> {{ artist.photos[0].lieu.city }} </mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="{{ artist.photos[0].description }}" alt="Photo of a Shiba Inu">
+  </mat-card>
+  <mat-card>
+    <mat-card-content>
+      <p>
+        {{ artist.firstname }} {{ artist.lastname }}
+        <br>
+        {{ artist.description }}
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
+</div>
