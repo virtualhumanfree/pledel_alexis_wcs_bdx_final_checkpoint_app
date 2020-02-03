@@ -26,18 +26,16 @@
     <button mat-button [matMenuTriggerFor]="menu">Menu</button>
     <mat-menu #menu="matMenu">
       <a [routerLink]="['/accueil']" routerLinkActive="burger-link-active" mat-menu-item>Accueil</a>
-      <a [routerLink]="['/numero']" routerLinkActive="burger-link-active" mat-menu-item>Nos Numéros</a>
-      <a [routerLink]="['/artist']" routerLinkActive="burger-link-active" mat-menu-item>Nos Artists</a>
-      <a [routerLink]="['/animal']" routerLinkActive="burger-link-active" mat-menu-item>Nos Animals</a>
+      <a [routerLink]="['/numeros']" routerLinkActive="burger-link-active" mat-menu-item>Nos Numéros</a>
+      <a [routerLink]="['/artists']" routerLinkActive="burger-link-active" mat-menu-item>Nos Artists</a>
+      <a [routerLink]="['/animals']" routerLinkActive="burger-link-active" mat-menu-item>Nos Animals</a>
+      <a [routerLink]="['/events']" routerLinkActive="burger-link-active" mat-menu-item>Nos Evènement</a>
       <a [routerLink]="['/contact']" routerLinkActive="burger-link-active" mat-menu-item>Contact</a>
     </mat-menu>
   </div>
 
   <div class="container">
-    <div class="button" id="button-5" class="connect" [routerLink]="['/login']" routerLinkActive="router-link-active">
-      <div id="translate"></div>
-      <p>Connexion</p>
-    </div>
+      <p class="connect" [routerLink]="['/login']" routerLinkActive="router-link-active">Connexion</p>
   </div>
 
 

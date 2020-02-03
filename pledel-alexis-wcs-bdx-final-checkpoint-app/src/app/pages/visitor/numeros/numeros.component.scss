@@ -7,3 +7,20 @@
   justify-content: space-around;
   margin: 4%;
 }
+
+@media screen and (max-width: 769px) {
+  .containerCard {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+      align-items: center;
+  }
+
+  .mat-card {
+    width: 85%;
+  }
+}

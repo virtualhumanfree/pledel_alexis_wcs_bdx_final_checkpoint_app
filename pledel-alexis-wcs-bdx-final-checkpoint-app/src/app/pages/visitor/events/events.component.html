@@ -1,25 +1,76 @@
 <app-navbar></app-navbar>
-<div class="containerCard" *ngFor="let event of tabAllEvents; let i = index">
-  <mat-card>
-    <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title> {{ event.title }} </mat-card-title>
-    <mat-card-subtitle> {{ event.lieu.city }} </mat-card-subtitle>
-  </mat-card-header>
-  <img mat-card-image src="{{ event.photobandeau }}" alt="Photo of a Shiba Inu">
-  </mat-card>
+<div class="containerPopupCode" *ngIf="popupCode === true">
   <mat-card>
     <mat-card-content>
-      <div>
-         Cette évenement regroupera les numeros suivant :
-         <div *ngFor="let numero of event.numeros; let i = index">
-          <p> {{ i+1 }} - {{ numero.title }} </p>
-          <div *ngFor="let artist of numero.artists; let i = index">
-            <p>Artiste : {{ artist.firstname }} {{ artist.lastname }}</p>
-          </div>
-         </div>
-         Vous passerez un agréable moment accompagner de votre présentateur préféré {{ event.artists[0].firstname }} {{ event.artists[0].lastname }}
-      </div>
+      <p>Votre achat à bien été éffectuer</p>
+      <br>
+      <p>Votre code est : <b>#G54Z34UT</b></p>
+      <br>
+      <button (click)="closePopupAchat()">Fermé</button>
+      <button (click)="closePopupAndAchat()">Réservé un autre Ticket</button>
     </mat-card-content>
   </mat-card>
 </div>
+<div class="containerPopupTicket" *ngIf="popupTicket === true">
+  <mat-card>
+    <mat-icon (click)="openPopupTicket()" class="closeIconTicket">close</mat-icon>
+    <mat-card-content>
+      <label>Choix Du Ticket</label>
+      <br>
+      <mat-form-field>
+        <mat-label>Choix Du Ticket</mat-label>
+        <mat-select>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let ticket of tabTicketOfEvent" [value]="ticket">
+            {{ticket.role}} - {{ticket.prix}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <button (click)="closePopupAndAchat()">Réserver</button>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+<div class="containerCard" *ngFor="let event of tabAllEvents; let i = index">
+  <mat-card>
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title> {{ event.title }} </mat-card-title>
+      <mat-card-subtitle> {{ event.lieu.city }} </mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="{{ event.photobandeau }}" alt="Photo of a Shiba Inu">
+  </mat-card>
+  <mat-card>
+    <mat-card-content>
+      <div *ngIf="event.numeros[0] === undefined">
+        <p>Aucune précision sur les numéros présenter à cette évènement</p>
+      </div>
+      <div *ngIf="event.numeros[0] !== undefined">
+        <div *ngFor="let numero of event.numeros; let i = index">
+          <div *ngIf="numero.title !== undefined">
+            Cette évenement regroupera les numeros suivant :
+            <p> {{ i+1 }} - {{ numero.title }} </p>
+            <div *ngFor="let artist of numero.artists; let i = index">
+              <div *ngIf="artist.firstname !== undefined">
+                <p>Artiste : {{ artist.firstname }} {{ artist.lastname }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="event.numeros[0] === undefined">
+        <p>Aucune précision sur le présentateur à cette évènement</p>
+      </div>
+      <div *ngIf="event.artists[0] !== undefined">
+        Vous passerez un agréable moment accompagner de votre présentateur préféré {{ event.artists[0].firstname }}
+        {{ event.artists[0].lastname }}
+      </div>
+      <button class="btnBooking" (click)="openPopupTicket(event.id)">
+        Réserver
+      </button>
+    </mat-card-content>
+  </mat-card>
+</div>
+<app-footer></app-footer>

@@ -1,3 +1,4 @@
+import { FooterComponent } from './../components/footer/footer.component';
 import { HomeComponent } from './home/home/home.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
@@ -36,7 +37,8 @@ import { EventsComponent } from './events/events.component';
     ArtistsComponent,
     AnimalsComponent,
     NumerosComponent,
-    EventsComponent
+    EventsComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,

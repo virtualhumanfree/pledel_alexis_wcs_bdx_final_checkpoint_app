@@ -7,3 +7,43 @@
   justify-content: space-around;
   margin: 4%;
 }
+
+.btnDelete {
+  height: 14%;
+  cursor: pointer;
+}
+
+.containerBtnAction {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+// // Responsive
+
+@media screen and (max-width: 769px) {
+  .containerCard {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+      align-items: center;
+  }
+
+  .mat-card {
+    width: 85%;
+  }
+
+  .containerBtnAction {
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    margin-top: 5%;
+    width: 100%;
+    justify-content: space-around;
+  }
+}

@@ -1,3 +1,5 @@
+import { TicketService } from './../../../shared/services/ticket.service';
+import { Ticket } from './../../../shared/models/ticket';
 import { Event } from './../../../shared/models/event';
 import { EventService } from './../../../shared/services/event.service';
 import { Component, OnInit } from '@angular/core';
@@ -10,9 +12,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventsComponent implements OnInit {
 
-  constructor(private eventService: EventService) { }
+  constructor(private eventService: EventService,
+              private ticketService: TicketService) { }
 
   tabAllEvents: Event[];
+  tabTicketOfEvent: Ticket;
+
+  popupCode = false;
+  popupTicket = false;
 
   ngOnInit() {
     this.eventService.getAll()
@@ -20,6 +27,24 @@ export class EventsComponent implements OnInit {
       console.log(tabEvents);
       this.tabAllEvents = tabEvents;
     });
+  }
+
+  openPopupTicket(id) {
+    this.popupTicket = !this.popupTicket;
+    for (const event of this.tabAllEvents) {
+      if (event.id === id) {
+        this.tabTicketOfEvent = event.tickets;
+      }
+    }
+  }
+
+  closePopupAndAchat() {
+    this.popupTicket = !this.popupTicket;
+    this.popupCode = !this.popupCode;
+  }
+
+  closePopupAchat() {
+    this.popupCode = !this.popupCode;
   }
 
 }

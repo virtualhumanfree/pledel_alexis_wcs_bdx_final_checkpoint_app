@@ -24,6 +24,10 @@ export class TicketService {
     });
   }
 
+  public getTicketOfEvent(id: number): Observable<Ticket[]> {
+    return this.http.get(TicketService.URL + '/ticketofevent/' + id).pipe(map(this.convertDataFromServerToSites));
+  }
+
   public getById(id: number): Observable<Ticket> {
     return this.http.get(TicketService.URL + '/' + id).pipe(map((ticket: Ticket) => new Ticket(ticket)));
   }

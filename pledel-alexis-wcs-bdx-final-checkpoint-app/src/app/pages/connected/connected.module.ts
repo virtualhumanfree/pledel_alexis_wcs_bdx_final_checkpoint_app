@@ -31,6 +31,7 @@ import { MatProgressSpinnerModule } from '@angular/material';
 import { NumerosComponent } from './pages/numeros/numeros.component';
 import { AnimalsComponent } from './pages/animals/animals.component';
 import { ArtistsComponent } from './pages/artists/artists.component';
+import { PhotosComponent } from './pages/photos/photos.component';
 // import { UserRolePipe } from './../../shared/pipe/user-role.pipe';
 
 
@@ -41,7 +42,8 @@ import { ArtistsComponent } from './pages/artists/artists.component';
     NumerosComponent,
     AnimalsComponent,
     ArtistsComponent,
-    EventsComponent
+    EventsComponent,
+    PhotosComponent
     // UserRolePipe,
   ],
 

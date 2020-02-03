@@ -1,8 +1,10 @@
+import { TicketRole } from './../enum/ticket-role.enum';
 import { Event } from './event';
+
 
 export class Ticket {
   public id: number;
-  public role: string;
+  public role: TicketRole;
   public prix: number;
   public event: Event;
 

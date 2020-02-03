@@ -1,0 +1,110 @@
+.containerBtn {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.containerCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    display: flex;
+    position: fixed;
+    align-self: center;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.form {
+    display: contents;
+}
+
+.btnAction {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.btnOpen {
+    transition: box-shadow 280ms cubic-bezier(.4,0,.2,1);
+    display: block;
+    position: relative;
+    padding: 16px;
+    border-radius: 4px;
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+    width: 50%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    text-align: center;
+}
+
+.btnOpen:hover {
+    background-color: lightgrey;
+    font-weight: bold;
+    cursor: pointer;
+}
+.card {
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    align-items: center;
+}
+
+.backgroundContainerCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    display: flex;
+    position: fixed;
+    background: transparent;
+    align-self: center;
+    width: 100%;
+    height: 100%;
+}
+
+.mat-icon {
+    display: flex;
+    align-self: flex-end;
+    position: fixed;
+}
+
+// // Responsive
+
+@media screen and (max-width: 769px) {
+	.mat-card {
+        overflow-y: auto;
+    }
+
+    .containerCard {
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        flex-direction: column;
+        -webkit-box-pack: center;
+        display: flex;
+        margin-top: -20%;
+        position: fixed;
+        align-self: center;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+    }
+
+    .card {
+        height: 71%;
+        overflow-y: auto;
+        display: flex;
+        margin: 3%;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        flex-direction: column;
+        -webkit-box-align: center;
+        align-items: center;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+}

@@ -29,4 +29,10 @@ export class EventsComponent implements OnInit {
       });
   }
 
+  deleteEvent(id) {
+    console.log(id);
+    this.eventService.delete(id).subscribe(() => console.log('delete ok'));
+    // this.snackBarService.openSnackBar(`L'utilisateur ${this.user.firstName}  a été supprimé.`);
+  }
+
 }

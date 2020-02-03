@@ -28,4 +28,10 @@ export class NumerosComponent implements OnInit {
     console.log(this.tabAllNumeros);
   }
 
+  deleteNumero(id) {
+    console.log(id);
+    this.numerosService.delete(id).subscribe(() => console.log('delete ok'));
+    // this.snackBarService.openSnackBar(`L'utilisateur ${this.user.firstName}  a été supprimé.`);
+  }
+
 }

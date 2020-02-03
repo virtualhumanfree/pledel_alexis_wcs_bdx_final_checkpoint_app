@@ -15,7 +15,8 @@ export class NavbarConnectComponent implements OnInit {
     ['/log/numeros', 'Nos Numéros'],
     ['/log/artists', 'Nos Artistes'],
     ['/log/animals', 'Nos Animaux'],
-    ['/log/events', 'Nos Evènement']
+    ['/log/events', 'Nos Evènements'],
+    ['/log/photos', 'Nos Photos']
   ];
 
   private adminList = [
@@ -23,7 +24,8 @@ export class NavbarConnectComponent implements OnInit {
     ['/log/numeros', 'Nos Numéros'],
     ['/log/artists', 'Nos Artistes'],
     ['/log/animals', 'Nos Animaux'],
-    ['/log/events', 'Nos Evènement']
+    ['/log/events', 'Nos Evènements'],
+    ['/log/photos', 'Nos Photos']
   ];
 
   selectedList: string[][];

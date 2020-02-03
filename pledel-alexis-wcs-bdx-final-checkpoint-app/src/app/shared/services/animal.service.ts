@@ -24,6 +24,10 @@ export class AnimalService {
     });
   }
 
+  public getAnimalNotAssign(): Observable<Animal[]> {
+    return this.http.get(AnimalService.URL + '/animalNotAssign').pipe(map(this.convertDataFromServerToSites));
+  }
+
   public getById(id: number): Observable<Animal> {
     return this.http.get(AnimalService.URL + '/' + id).pipe(map((animal: Animal) => new Animal(animal)));
   }

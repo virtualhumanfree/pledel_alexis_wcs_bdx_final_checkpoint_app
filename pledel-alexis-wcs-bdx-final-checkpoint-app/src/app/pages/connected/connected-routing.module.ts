@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NumerosComponent } from './pages/numeros/numeros.component';
 import { AnimalsComponent } from './pages/animals/animals.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { PhotosComponent } from './pages/photos/photos.component';
 
 const connectedRoutes: Routes = [
 
@@ -38,6 +39,12 @@ const connectedRoutes: Routes = [
   {
     path: 'events',
     component: EventsComponent,
+    canActivate: [AuthGuard],
+    data: { role: [UserRole.ADMIN] }
+  },
+  {
+    path: 'photos',
+    component: PhotosComponent,
     canActivate: [AuthGuard],
     data: { role: [UserRole.ADMIN] }
   },

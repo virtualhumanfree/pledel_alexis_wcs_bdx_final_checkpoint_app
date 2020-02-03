@@ -54,7 +54,7 @@ a {
 	color: #523603;
 	text-decoration: none;
 	letter-spacing: 1px;
-	font-size: 1rem;
+	font-size: 2rem;
 }
 
 /* Button Styles */
@@ -113,7 +113,8 @@ a {
 }
 
 #button-5:hover a {
-	color: #2d3142;
+  color: lightgrey;
+  cursor: pointer;
 }
 
 .B {
@@ -121,7 +122,8 @@ a {
 	border: none;
 	background-color: white;
 	height: 40px;
-	width: 170px;
+  width: 170px;
+  cursor: pointer;
 }
 
 // // Responsive

@@ -1,0 +1,50 @@
+.mat-card {
+  width: 37%;
+}
+
+.containerCard {
+display: flex;
+justify-content: space-around;
+margin: 4%;
+}
+
+.containerCardHeader {
+  display: flex;
+  justify-content: space-around;
+  margin: 4%;
+  margin-bottom: 10%;
+  }
+
+.title {
+  font-style: italic;
+  text-align: center;
+}
+
+hr {
+  border: 0;
+    height: 1px;
+    border-radius: 40%;
+    width: 85%;
+    background: brown;
+}
+
+.cardHearder {
+  width: 100%;
+}
+
+@media screen and (max-width: 769px) {
+  .containerCard {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+      align-items: center;
+  }
+
+  .mat-card {
+    width: 85%;
+  }
+}

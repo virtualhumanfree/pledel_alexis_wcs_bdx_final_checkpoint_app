@@ -7,3 +7,50 @@ display: flex;
 justify-content: space-around;
 margin: 4%;
 }
+
+.containerPopupTicket {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 2;
+  display: block;
+  text-align: -webkit-center;
+  margin-top: 15%;
+}
+
+.containerPopupCode {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 2;
+  display: block;
+  text-align: -webkit-center;
+  margin-top: 15%;
+}
+
+.closeIconTicket {
+  margin-left: 90%;
+  cursor: pointer;
+}
+
+.btnBooking {
+  margin-left: 35%;
+  margin-top: 10%;
+}
+
+@media screen and (max-width: 769px) {
+  .containerCard {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+      align-items: center;
+  }
+
+  .mat-card {
+    width: 85%;
+  }
+}

@@ -2,6 +2,10 @@
   width: 37%;
 }
 
+.mat-card-content {
+  text-align: center;
+}
+
 .containerCard {
 display: flex;
 justify-content: space-around;
@@ -9,14 +13,14 @@ margin: 4%;
 }
 
 .btnDelete {
-  height: 14%;
-  cursor: pointer;
+height: 14%;
+cursor: pointer;
 }
 
 .containerBtnAction {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
+display: flex;
+flex-direction: column;
+justify-content: space-evenly;
 }
 
 // // Responsive

@@ -28,4 +28,10 @@ export class AnimalsComponent implements OnInit {
     console.log(this.tabAllAnimals);
   }
 
+  deleteAnimal(id) {
+    console.log(id);
+    this.animalService.delete(id).subscribe(() => console.log('delete ok'));
+    // this.snackBarService.openSnackBar(`L'utilisateur ${this.user.firstName}  a été supprimé.`);
+  }
+
 }

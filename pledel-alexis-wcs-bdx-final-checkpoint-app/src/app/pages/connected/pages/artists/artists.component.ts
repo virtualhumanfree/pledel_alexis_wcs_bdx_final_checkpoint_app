@@ -28,4 +28,10 @@ export class ArtistsComponent implements OnInit {
     });
   }
 
+  deleteArtist(id) {
+    console.log(id);
+    this.artistService.delete(id).subscribe(() => console.log('delete ok'));
+    // this.snackBarService.openSnackBar(`L'utilisateur ${this.user.firstName}  a été supprimé.`);
+  }
+
 }

@@ -24,6 +24,10 @@ export class LieuService {
     });
   }
 
+  public getLieuxNotAssign(): Observable<Lieu[]> {
+    return this.http.get(LieuService.URL + '/lieuNotAssign').pipe(map(this.convertDataFromServerToSites));
+  }
+
   public getById(id: number): Observable<Lieu> {
     return this.http.get(LieuService.URL + '/' + id).pipe(map((lieu: Lieu) => new Lieu(lieu)));
   }

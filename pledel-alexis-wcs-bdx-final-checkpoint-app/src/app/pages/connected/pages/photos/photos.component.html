@@ -1,0 +1,42 @@
+<app-navbar-connect [user]="user"></app-navbar-connect>
+<div class="containerCard" *ngFor="let photo of tabAllPhoto; let i = index">
+  <mat-card>
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title> {{ photo.title }} </mat-card-title>
+      <mat-card-subtitle> {{ photo.lieu.name }} </mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="{{ photo.description }}" alt="Photo of a Shiba Inu">
+  </mat-card>
+  <mat-card>
+    <mat-card-content>
+      <p>
+        <b>Nom du Lieu ou cette photo à été prise : {{ photo.lieu.name }}</b>
+      </p>
+      <p>
+        <b>Adresse :</b>
+      </p>
+      <p>
+        {{ photo.lieu.address }}
+      </p>
+      <p>
+        <b>Ville :</b>
+      </p>
+      <p>
+        {{ photo.lieu.city }}
+      </p>
+      <b>Code Postal:</b>
+      <p>
+        {{ photo.lieu.postcode }}
+      </p>
+    </mat-card-content>
+  </mat-card>
+  <div class="containerBtnAction">
+    <button class="btnDelete" (click)="deletePhoto(photo.id)">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button class="btnDelete" (click)="deletePhoto(photo.id)">
+      <mat-icon>delete_forever</mat-icon>
+    </button>
+  </div>
+</div>

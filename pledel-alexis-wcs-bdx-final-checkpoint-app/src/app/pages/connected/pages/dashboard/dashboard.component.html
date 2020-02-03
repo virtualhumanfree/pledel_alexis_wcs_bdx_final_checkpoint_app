@@ -1,25 +1,215 @@
 <app-navbar-connect [user]="user"></app-navbar-connect>
 
-<div *ngIf="activePopupNumero !== false">
-    <mat-card>
-        <h1>Advanced Form Types</h1>
+<div class="containerCard" *ngIf="activePopupNumero !== false">
 
-        <form [formGroup]="formCreateNumero" (ngSubmit)="submitNumero()">
-            <!-- text input in angular forms -->
-            <label for="title">Title</label>
+    <mat-card class="card">
+
+        <mat-icon (click)="toglePopupNumero()" class="closePopupNumero">close</mat-icon>
+
+        <h1>Création d'un Numéro</h1>
+
+        <form class="form" [formGroup]="formCreateNumero" (ngSubmit)="submitNumero()">
+            <label for="title">Titre</label>
             <input formControlName="title" id="title" />
+            <div *ngIf="submittedNumero && numero.title.errors" class="invalid-feedback">
+                <div *ngIf="numero.title.errors.required">Iniquez une photo</div>
+            </div>
 
             <br>
 
-            <!-- color input in angular forms -->
+            <label for="description">Description</label>
+            <input formControlName="description" id="description" />
+            <div *ngIf="submittedNumero && numero.description.errors" class="invalid-feedback">
+                <div *ngIf="numero.description.errors.required">Iniquez une photo</div>
+            </div>
+
+            <br>
+
+            <label for="duration">Durée du Numéros</label>
+            <input formControlName="duration" id="duration" type="number" />
+            <div *ngIf="submittedNumero && numero.duration.errors" class="invalid-feedback">
+                <div *ngIf="numero.duration.errors.required">Iniquez une photo</div>
+            </div>
+
+            <br>
+
+            <label>Choix De Photo</label>
+            <mat-form-field>
+                <mat-label>Choix de photo</mat-label>
+                <mat-select formControlName="photos" required>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let photo of tabPhotoNotAssign" [value]="photo">
+                        {{photo.title}}
+                    </mat-option>
+                </mat-select>
+                <div *ngIf="submittedNumero && numero.photos.errors" class="invalid-feedback">
+                    <div *ngIf="numero.photos.errors.required">Iniquez une photo</div>
+                </div>
+            </mat-form-field>
+
+            <br>
+
+            <label>Choix de l'Evènement</label>
+            <mat-form-field>
+                <mat-label>Choix de l'Evènement</mat-label>
+                <mat-select formControlName="event" required>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let event of tabAllEvents" [value]="event">
+                        {{event.title}}
+                    </mat-option>
+                </mat-select>
+                <div *ngIf="submittedNumero && numero.event.errors" class="invalid-feedback">
+                    <div *ngIf="numero.event.errors.required">Iniquez une photo</div>
+                </div>
+            </mat-form-field>
+
+            <br>
+
+            <label>Choix de l'artiste</label>
+            <mat-form-field>
+                <mat-label>Choix de l'artiste</mat-label>
+                <mat-select formControlName="artists" required>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let artist of tabArtistNotAssign" [value]="artist">
+                        {{artist.name_artist}}
+                    </mat-option>
+                </mat-select>
+                <div *ngIf="submittedNumero && numero.artists.errors" class="invalid-feedback">
+                    <div *ngIf="numero.artists.errors.required">Iniquez une photo</div>
+                </div>
+            </mat-form-field>
+
+            <br />
+            <div class="btnAction">
+                <button class="button" type="reset" (click)="onReset()">Annuler</button>
+                <button>Submit</button>
+            </div>
+        </form>
+    </mat-card>
+</div>
+
+
+
+
+<!--------------------------------------------POPUP ARTIST----------------------------------------------------------->
+
+
+
+
+<div class="containerCard" *ngIf="activePopupArtist !== false">
+
+    <mat-card class="card">
+
+        <mat-icon (click)="toglePopupArtist()" class="closePopupArtist">close</mat-icon>
+
+        <h1>Création d'un Artiste</h1>
+
+        <form class="form" [formGroup]="formCreateArtist" (ngSubmit)="submitArtist()">
+            <label for="name_artist">Title</label>
+            <input formControlName="name_artist" id="name_artist" />
+
+            <br>
+
+            <label for="firstname">Prénom</label>
+            <input formControlName="firstname" id="firstname" />
+
+            <br>
+
+            <label for="lastname">Nom</label>
+            <input formControlName="lastname" id="lastname" />
+
+            <br>
+
             <label for="description">Description</label>
             <input formControlName="description" id="description" />
 
             <br>
 
-            <!-- password input in angular forms -->
-            <label for="duration">Durée du Numéros</label>
-            <input formControlName="duration" id="duration" type="number" />
+            <mat-form-field>
+                <mat-label>Choix de photo</mat-label>
+                <mat-select formControlName="photos" required>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let photo of tabPhotoNotAssign" [value]="photo">
+                        {{photo.title}}
+                    </mat-option>
+                </mat-select>
+                <div *ngIf="submittedArtist && artist.photos.errors" class="invalid-feedback">
+                    <div *ngIf="artist.photos.errors.required">Iniquez une photo</div>
+                </div>
+            </mat-form-field>
+
+            <br>
+
+            <mat-form-field>
+                <mat-label>Choix du Numéro</mat-label>
+                <mat-select formControlName="numero" required>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let numero of tabAllNumero" [value]="numero">
+                        {{numero.title}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <br>
+
+            <mat-form-field>
+                <mat-label>Choix d'évènement</mat-label>
+                <mat-select formControlName="event" required>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let event of tabAllEvents" [value]="event">
+                        {{event.title}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <br>
+
+            <mat-form-field>
+                <mat-label>Choix d'animal (facultatif)</mat-label>
+                <mat-select formControlName="animal" required>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let animal of tabAnimalNotAssign" [value]="animal">
+                        {{animal.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <br />
+            <button class="button" type="reset" (click)="onReset()">Annuler</button>
+            <button>Submit</button>
+        </form>
+    </mat-card>
+</div>
+
+
+
+
+<!--------------------------------------------POPUP ANIMAL----------------------------------------------------------->
+
+
+
+
+<div class="containerCard" *ngIf="activePopupAnimal !== false">
+
+    <mat-card class="card">
+
+        <mat-icon (click)="toglePopupAnimal()" class="closePopupAnimal">close</mat-icon>
+
+        <h1>Création d'un Animal</h1>
+
+        <form [formGroup]="formCreateAnimal" (ngSubmit)="submitAnimal()">
+            <label for="name">Nom</label>
+            <input formControlName="name" id="name" />
+
+            <br>
+
+            <label for="race">Race</label>
+            <input formControlName="race" id="race" />
+
+            <br>
+
+            <label for="description">Description</label>
+            <input formControlName="description" id="description" />
 
             <br>
 
@@ -27,52 +217,331 @@
             <mat-form-field>
                 <mat-label>Choix de photo</mat-label>
                 <mat-select formControlName="photos" required>
-                  <mat-option>--</mat-option>
-                  <mat-option *ngFor="let photo of tabPhotoNotAssign" [value]="photo">
-                    {{photo.title}}
-                  </mat-option>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let photo of tabPhotoNotAssign" [value]="photo">
+                        {{photo.title}}
+                    </mat-option>
                 </mat-select>
-                <div *ngIf="submitted && f.photos.errors" class="invalid-feedback">
-                    <div *ngIf="f.photos.errors.required">Iniquez une photo</div>
+                <div *ngIf="submittedAnimal && animal.photos.errors" class="invalid-feedback">
+                    <div *ngIf="animal.photos.errors.required">Iniquez une photo</div>
                 </div>
-              </mat-form-field>
+            </mat-form-field>
 
-              <br>
+            <br>
 
-              <mat-form-field>
-                <mat-label>Choix d'évènement</mat-label>
-                <mat-select formControlName="event" required>
-                  <mat-option>--</mat-option>
-                  <mat-option *ngFor="let event of tabAllEvents" [value]="event">
-                    {{event.title}}
-                  </mat-option>
-                </mat-select>
-                <div *ngIf="submitted && f.event.errors" class="invalid-feedback">
-                    <div *ngIf="f.event.errors.required">Iniquez une photo</div>
-                </div>
-              </mat-form-field>
-
-              <br>
-
-              <mat-form-field>
-                <mat-label>Choix d'artistes</mat-label>
+            <mat-form-field>
+                <mat-label>Choix d'Artiste (facultatif)</mat-label>
                 <mat-select formControlName="artists" required>
-                  <mat-option>--</mat-option>
-                  <mat-option *ngFor="let artist of tabArtistNotAssign" [value]="artist">
-                    {{artist.name_artist}}
-                  </mat-option>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let artist of tabArtistNotAssign" [value]="artist">
+                        {{artist.name_artist}}
+                    </mat-option>
                 </mat-select>
-                <div *ngIf="submitted && f.artists.errors" class="invalid-feedback">
-                    <div *ngIf="f.artists.errors.required">Iniquez une photo</div>
-                </div>
-              </mat-form-field>
-
+            </mat-form-field>
+            <div *ngIf="submittedAnimal && animal.artists.errors" class="invalid-feedback">
+                <div *ngIf="animal.artists.errors.required">Iniquez une photo</div>
+            </div>
             <br />
+            <button class="button" type="reset" (click)="onReset()">Annuler</button>
             <button>Submit</button>
         </form>
     </mat-card>
 </div>
 
-<div class="btnOpenNumero" (click)="toglePopupNumero()">
-    Création d'un Numéro
+
+
+<!--------------------------------------------POPUP EVENT----------------------------------------------------------->
+
+
+
+
+<div class="containerCard" *ngIf="activePopupEvent !== false">
+
+    <mat-card class="card">
+
+        <mat-icon (click)="toglePopupEvent()" class="closePopupEvent">close</mat-icon>
+
+        <h1>Création d'un Evènement</h1>
+
+        <form [formGroup]="formCreateEvent" (ngSubmit)="submitEvent()">
+            <label for="title">Title</label>
+            <input formControlName="title" id="title" />
+            <div *ngIf="submittedEvent && event.title.errors" class="invalid-feedback">
+                <div *ngIf="event.title.errors.required">Iniquez un Titre</div>
+            </div>
+
+            <br>
+
+            <label for="photobandeau">Photo</label>
+            <input formControlName="photobandeau" id="photobandeau" />
+            <!-- <div *ngIf="submittedEvent && event.photobandeau.errors" class="invalid-feedback">
+                <div *ngIf="event.photobandeau.errors.required">Iniquez une photo</div>
+            </div> -->
+
+            <br>
+
+            <mat-form-field>
+                <mat-label>Choix du Numéro</mat-label>
+                <!--Ajouter choix multiple-->
+                <mat-select formControlName="numeros" required>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let numero of tabAllNumero" [value]="numero">
+                        {{numero.title}}
+                    </mat-option>
+                </mat-select>
+                <!-- <div *ngIf="submittedEvent && event.numeros.errors" class="invalid-feedback">
+                    <div *ngIf="event.numeros.errors.required">Iniquez un Numéro</div>
+                </div> -->
+            </mat-form-field>
+
+
+            <br>
+
+            <mat-form-field>
+                <mat-label>Choix d'Artiste</mat-label>
+                <!--Ajouter choix multiple-->
+                <mat-select formControlName="artists" required>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let artist of tabArtistNotAssign" [value]="artist">
+                        {{artist.name_artist}}
+                    </mat-option>
+                </mat-select>
+                <div *ngIf="submittedEvent && event.artists.errors" class="invalid-feedback">
+                    <div *ngIf="event.artists.errors.required">Iniquez une photo</div>
+                </div>
+            </mat-form-field>
+
+
+            <br>
+
+            <mat-form-field>
+                <mat-label>Choix du Lieux</mat-label>
+                <mat-select formControlName="lieu" required>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let lieu of tabLieuxNotAssign" [value]="lieu">
+                        {{lieu.name}}
+                    </mat-option>
+                </mat-select>
+                <!-- <div *ngIf="submittedEvent && event.lieu.errors" class="invalid-feedback">
+                    <div *ngIf="event.lieu.errors.required">Iniquez une photo</div>
+                </div> -->
+            </mat-form-field>
+
+            <br>
+
+            <mat-form-field>
+                <mat-label>Choix des Tarif</mat-label>
+                <!--Ajouter choix multiple-->
+                <mat-select formControlName="tickets" required>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let ticket of tabAllTickets" [value]="ticket">
+                        {{ticket.role}} {{ticket.prix}}
+                    </mat-option>
+                </mat-select>
+                <!-- <div *ngIf="submittedEvent && event.tickets.errors" class="invalid-feedback">
+                    <div *ngIf="event.tickets.errors.required">Iniquez une photo</div>
+                </div> -->
+            </mat-form-field>
+
+            <br />
+            <button class="button" type="reset" (click)="onReset()">Annuler</button>
+            <button>Submit</button>
+        </form>
+    </mat-card>
+</div>
+
+<!--------------------------------------------POPUP TICKET----------------------------------------------------------->
+
+
+
+
+<div class="containerCard" *ngIf="activePopupTicket !== false">
+
+    <mat-card class="card">
+
+        <mat-icon (click)="toglePopupTicket()" class="closePopupTicket">close</mat-icon>
+
+        <h1>Création d'un Ticket</h1>
+
+        <form [formGroup]="formCreateTicket" (ngSubmit)="submitTicket()">
+            <mat-form-field>
+                <mat-label>Choix du Role</mat-label>
+                <mat-select formControlName="role" required>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let role of tabRoleTickets" [value]="role.role">
+                        {{ role.name }}
+                    </mat-option>
+                </mat-select>
+                <!-- <div *ngIf="submittedTicket && tickets.roles.errors" class="invalid-feedback">
+                    <div *ngIf="tickets.role.errors.required">Iniquez une photo</div>
+                </div> -->
+            </mat-form-field>
+
+
+            <br>
+
+            <label for="prix">Prix</label>
+            <input formControlName="prix" id="prix" type="number" />
+
+            <br>
+
+            <mat-form-field>
+                <mat-label>Choix de l'Evènement</mat-label>
+                <!--Ajouter choix multiple-->
+                <mat-select formControlName="event" required>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let event of tabAllEvents" [value]="event">
+                        {{event.title}}
+                    </mat-option>
+                </mat-select>
+                <div *ngIf="submittedTicket && tickets.event.errors" class="invalid-feedback">
+                    <div *ngIf="tickets.event.errors.required">Iniquez un Evènement</div>
+                </div>
+            </mat-form-field>
+
+            <br />
+
+            <button class="button" type="reset" (click)="onReset()">Annuler</button>
+
+            <button>Submit</button>
+        </form>
+    </mat-card>
+</div>
+
+
+
+
+<!--------------------------------------------POPUP PHOTO----------------------------------------------------------->
+
+
+
+
+<div class="containerCard" *ngIf="activePopupPhoto !== false">
+
+    <mat-card class="card">
+
+        <mat-icon (click)="toglePopupPhoto()" class="closePopupEvent">close</mat-icon>
+
+        <h1>Création d'un Evènement</h1>
+
+        <form [formGroup]="formCreatePhoto" (ngSubmit)="submitPhoto()">
+            <label for="title">Titre</label>
+            <input formControlName="title" id="title" />
+            <div *ngIf="submittedPhoto && photo.title.errors" class="invalid-feedback">
+                <div *ngIf="photo.title.errors.required">Iniquez un Titre</div>
+            </div>
+
+            <br>
+
+            <label for="description">Photo</label>
+            <input formControlName="description" id="description" />
+            <div *ngIf="submittedPhoto && photo.description.errors" class="invalid-feedback">
+                <div *ngIf="photo.description.errors.required">Iniquez le lien URL d'une photo</div>
+            </div>
+
+            <br>
+
+            <mat-form-field>
+                <mat-label>Choix du Numéro</mat-label>
+                <!--Ajouter choix multiple-->
+                <mat-select formControlName="numero" required>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let numero of tabAllNumero" [value]="numero">
+                        {{numero.title}}
+                    </mat-option>
+                </mat-select>
+                <!-- <div *ngIf="submittedEvent && f.numeros.errors" class="invalid-feedback">
+                    <div *ngIf="f.numeros.errors.required">Iniquez un Numéro</div>
+                </div> -->
+            </mat-form-field>
+
+
+            <br>
+
+            <mat-form-field>
+                <mat-label>Choix d'Artiste</mat-label>
+                <!--Ajouter choix multiple-->
+                <mat-select formControlName="artist" required>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let artist of tabArtistNotAssign" [value]="artist">
+                        {{artist.name_artist}}
+                    </mat-option>
+                </mat-select>
+                <!-- <div *ngIf="submittedEvent && f.artist.errors" class="invalid-feedback">
+                    <div *ngIf="f.artist.errors.required">Iniquez une photo</div>
+                </div> -->
+            </mat-form-field>
+
+
+            <br>
+
+            <mat-form-field>
+                <mat-label>Choix du Lieux</mat-label>
+                <mat-select formControlName="lieu" required>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let lieu of tabLieuxNotAssign" [value]="lieu">
+                        {{lieu.name}}
+                    </mat-option>
+                </mat-select>
+                <!-- <div *ngIf="submittedEvent && f.lieu.errors" class="invalid-feedback">
+                    <div *ngIf="f.lieu.errors.required">Iniquez une photo</div>
+                </div> -->
+            </mat-form-field>
+
+            <br>
+
+            <mat-form-field>
+                <mat-label>Choix d'un Animal</mat-label>
+                <!--Ajouter choix multiple-->
+                <mat-select formControlName="animal" required>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let animal of tabAnimalNotAssign" [value]="animal">
+                        {{animal.name}}
+                    </mat-option>
+                </mat-select>
+                <!-- <div *ngIf="submittedEvent && f.tickets.errors" class="invalid-feedback">
+                    <div *ngIf="f.tickets.errors.required">Iniquez une photo</div>
+                </div> -->
+            </mat-form-field>
+
+            <br />
+            <button class="button" type="reset" (click)="onReset()">Annuler</button>
+            <button>Submit</button>
+        </form>
+    </mat-card>
+</div>
+
+<div class="containerBtn">
+    <div class="btnOpen" (click)="toglePopupNumero()">
+        Création d'un Numéro
+    </div>
+
+    <br>
+
+    <div class="btnOpen" (click)="toglePopupArtist()">
+        Création d'un Artiste
+    </div>
+
+    <br>
+
+    <div class="btnOpen" (click)="toglePopupAnimal()">
+        Création d'un Animal
+    </div>
+
+    <br>
+
+    <div class="btnOpen" (click)="toglePopupEvent()">
+        Création d'un Evènement
+    </div>
+
+    <br>
+
+    <div class="btnOpen" (click)="toglePopupTicket()">
+        Création d'un Ticket
+    </div>
+    <br>
+
+    <div class="btnOpen" (click)="toglePopupPhoto()">
+        Création d'une Photo
+    </div>
 </div>
