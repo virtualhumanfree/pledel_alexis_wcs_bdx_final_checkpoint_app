@@ -67,7 +67,7 @@
         Vous passerez un agréable moment accompagner de votre présentateur préféré {{ event.artists[0].firstname }}
         {{ event.artists[0].lastname }}
       </div>
-      <button class="btnBooking" (click)="openPopupTicket(event.id)">
+      <button class="btnBooking" *ngIf="event.tickets[0] !== undefined" (click)="openPopupTicket(event.id)">
         Réserver
       </button>
     </mat-card-content>

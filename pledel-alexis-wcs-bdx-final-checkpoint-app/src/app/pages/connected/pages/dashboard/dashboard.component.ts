@@ -86,10 +86,10 @@ export class DashboardComponent implements OnInit {
         this.formCreatePhoto = this.formBuilderPhoto.group({
             title: ['', Validators.required],
             description: ['', Validators.required],
-            numero: [{}, Validators.required],
-            artist: [{}, Validators.required],
+            numero: [{}],
+            artist: [{}],
             lieu: [{}, Validators.required],
-            animal: [{}, Validators.required],
+            animal: [{}],
         });
     }
 
@@ -143,24 +143,7 @@ export class DashboardComponent implements OnInit {
         this.eventService.getAll()
             .subscribe((tabEvents: Event[]) => {
                 this.tabAllEvents = tabEvents;
-            });
-
-        this.artistService.getArtistNotAssign()
-            .subscribe((tabArtists: Artist[]) => {
-                this.tabArtistNotAssign = tabArtists;
-            });
-
-        this.animalService.getAnimalNotAssign()
-            .subscribe((tabAnimals: Animal[]) => {
-                this.tabAnimalNotAssign = tabAnimals;
-            });
-
-        this.numeroService.getAll()
-            .subscribe((tabNumeros: Numero[]) => {
-                this.tabAllNumero = tabNumeros;
-            });
-
-        this.lieuService.getAll()
+                this.lieuService.getAll()
             .subscribe((tabLieux: Lieu[]) => {
                 let tabLieuModify;
                 this.tabAllLieux = tabLieux;
@@ -178,6 +161,22 @@ export class DashboardComponent implements OnInit {
                         }
                     }
                 }
+            });
+            });
+
+        this.artistService.getArtistNotAssign()
+            .subscribe((tabArtists: Artist[]) => {
+                this.tabArtistNotAssign = tabArtists;
+            });
+
+        this.animalService.getAnimalNotAssign()
+            .subscribe((tabAnimals: Animal[]) => {
+                this.tabAnimalNotAssign = tabAnimals;
+            });
+
+        this.numeroService.getAll()
+            .subscribe((tabNumeros: Numero[]) => {
+                this.tabAllNumero = tabNumeros;
             });
 
         this.ticketService.getAll()
@@ -218,7 +217,11 @@ export class DashboardComponent implements OnInit {
         if (this.formCreateNumero.invalid) {
             return;
         } else {
-            this.numeroService.create(this.formCreateNumero.value)
+            const numero = this.formCreateNumero.value;
+            numero.photos = [new Photo(numero.photos)];
+            numero.event = new Event(numero.event);
+            numero.artists = [new Artist(numero.artists)];
+            this.numeroService.create(numero)
                 .subscribe(() => {
                     console.log('valid');
                 });
@@ -302,11 +305,23 @@ export class DashboardComponent implements OnInit {
         if (this.formCreatePhoto.invalid) {
             return;
         } else {
-            this.ticketService.create(this.formCreatePhoto.value)
+            const photo = this.formCreatePhoto.value;
+            photo.lieu = {
+                name: photo.lieu.name,
+                city: photo.lieu.city,
+                address: photo.lieu.address,
+                postcode: photo.lieu.postcode,
+                photo: photo.lieu.photo,
+                event: photo.lieu.event
+            };
+            photo.numero = new Numero(photo.numero);
+            photo.animal = new Animal(photo.animal);
+            photo.artist = new Artist(photo.artist);
+            this.photoService.create(photo)
                 .subscribe(() => {
                     console.log('valid');
                 });
-            console.log(this.formCreatePhoto.value);
+            console.log(photo);
         }
 
         console.log(this.formCreatePhoto.value);

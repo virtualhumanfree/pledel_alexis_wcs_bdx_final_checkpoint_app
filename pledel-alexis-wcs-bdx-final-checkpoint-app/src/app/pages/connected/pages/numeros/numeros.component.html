@@ -1,4 +1,93 @@
 <app-navbar-connect [user]="user"></app-navbar-connect>
+
+<div class="containerCardPopup" *ngIf="activePopupNumero !== false">
+
+  <mat-card class="card">
+<div class="matIconClose">
+      <mat-icon class="matIconClose" (click)="toglePopupNumero()" class="closePopupNumero">close</mat-icon>
+    </div>
+      <h1>Modification d'un Numéro</h1>
+
+      <form class="form" [formGroup]="formCreateNumero" (ngSubmit)="submitNumero()">
+          <label for="title">Titre</label>
+          <input formControlName="title" id="title" [value]="this.numeroSelected.title" />
+          <div *ngIf="submittedNumero && numero.title.errors" class="invalid-feedback">
+              <div *ngIf="numero.title.errors.required">Iniquez une photo</div>
+          </div>
+
+          <br>
+
+          <label for="description">Description</label>
+          <input formControlName="description" id="description" [value]="this.numeroSelected.description"/>
+          <div *ngIf="submittedNumero && numero.description.errors" class="invalid-feedback">
+              <div *ngIf="numero.description.errors.required">Iniquez une photo</div>
+          </div>
+
+          <br>
+
+          <label for="duration">Durée du Numéros</label>
+          <input formControlName="duration" id="duration" type="number" [value]="this.numeroSelected.duration"/>
+          <div *ngIf="submittedNumero && numero.duration.errors" class="invalid-feedback">
+              <div *ngIf="numero.duration.errors.required">Iniquez une photo</div>
+          </div>
+
+          <br>
+
+          <label>Choix De Photo</label>
+          <mat-form-field>
+              <mat-label>Choix de photo</mat-label>
+              <mat-select formControlName="photos" required>
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let photo of tabPhotoNotAssign" [value]="photo">
+                      {{photo.title}}
+                  </mat-option>
+              </mat-select>
+              <div *ngIf="submittedNumero && numero.photos.errors" class="invalid-feedback">
+                  <div *ngIf="numero.photos.errors.required">Iniquez une photo</div>
+              </div>
+          </mat-form-field>
+
+          <br>
+
+          <label>Choix de l'Evènement</label>
+          <mat-form-field>
+              <mat-label>Choix de l'Evènement</mat-label>
+              <mat-select formControlName="event" required>
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let event of tabAllEvents" [value]="event">
+                      {{event.title}}
+                  </mat-option>
+              </mat-select>
+              <div *ngIf="submittedNumero && numero.event.errors" class="invalid-feedback">
+                  <div *ngIf="numero.event.errors.required">Iniquez une photo</div>
+              </div>
+          </mat-form-field>
+
+          <br>
+
+          <label>Choix de l'artiste</label>
+          <mat-form-field>
+              <mat-label>Choix de l'artiste</mat-label>
+              <mat-select formControlName="artists" required>
+              <mat-option>--</mat-option>
+                  <mat-option *ngFor="let artist of tabAllArtist" [value]="artist">
+                      {{artist.name_artist}}
+                  </mat-option>
+              </mat-select>
+              <div *ngIf="submittedNumero && numero.artists.errors" class="invalid-feedback">
+                  <div *ngIf="numero.artists.errors.required">Iniquez une photo</div>
+              </div>
+          </mat-form-field>
+
+          <br />
+          <div class="btnAction">
+              <button class="button" type="reset" (click)="onReset()">Annuler</button>
+              <button>Submit</button>
+          </div>
+      </form>
+  </mat-card>
+</div>
+
 <div class="containerCard" *ngFor="let numero of tabAllNumeros; let i = index">
   <mat-card>
     <mat-card-header>
@@ -11,14 +100,14 @@
   <mat-card>
     <mat-card-content>
       <p>
-        Ce numéro est réalisé par {{ numero.artists.firstname }} {{ numero.artists.lastname }}.
+        Ce numéro est réalisé par {{ numero.artists[0].firstname }} {{ numero.artists[0].lastname }}.
         <br>
         {{ numero.description }}
       </p>
     </mat-card-content>
   </mat-card>
   <div class="containerBtnAction">
-    <button class="btnDelete" (click)="deleteNumero(numero.id)"><mat-icon>edit</mat-icon></button>
+    <button class="btnDelete" (click)="toglePopupNumero(numero)"><mat-icon>edit</mat-icon></button>
     <button class="btnDelete" (click)="deleteNumero(numero.id)"><mat-icon>delete_forever</mat-icon></button>
   </div>
 </div>

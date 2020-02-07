@@ -20,13 +20,14 @@
 
   <!-- <div class="button" id="button-5">
     <div id="translate"></div> -->
-
+<div class="containerDeconnexion">
     <mat-chip-list aria-label="menu">
-      <button class='B' mat-chip [matMenuTriggerFor]="menu"><a>Bonjour {{user.firstName}}</a></button>
+      <button class='B' mat-chip [matMenuTriggerFor]="menu"><a class="deconnexion"> Déconnexion</a></button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="logout()">Déconnexion</button>
       </mat-menu>
     </mat-chip-list>
+    </div>
   <!-- </div> -->
 
   <!-- <div class="button" id="button-5" *ngIf="user.role === 'user'">
